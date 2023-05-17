@@ -2,6 +2,37 @@ local overrides = require("custom.configs.overrides")
 
 ---@type NvPluginSpec[]
 local plugins = {
+  {
+    "folke/zen-mode.nvim",
+    config = function()
+      require("zen-mode").setup {
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      }
+    end,
+    lazy = false,
+    enabled = true,
+  },
+
+  {
+    'akinsho/bufferline.nvim',
+    config = function ()
+      require "custom.plugins.bufferline"
+    end,
+    enabled = true,
+    lazy = false,
+  },
+
+  {
+    'glepnir/dashboard-nvim',
+    event = 'VimEnter',
+    config = function()
+      require "custom.plugins.dashboard-nvim"
+    end,
+    dependencies = { {'nvim-tree/nvim-web-devicons'}}
+  },
+
   {"hrsh7th/vim-vsnip"},
   {"hrsh7th/vim-vsnip-integ"},
 
@@ -48,7 +79,33 @@ local plugins = {
 
   {
     "nvim-tree/nvim-tree.lua",
-    opts = overrides.nvimtree,
+    opts = {
+      git = {
+        enable = true,
+        ignore = false,
+      },
+
+      renderer = {
+        highlight_git = true,
+        icons = {
+          show = {
+            git = true,
+          },
+
+          glyphs = {
+            git = {
+              unstaged = "M",
+              staged = "A",
+              unmerged = "U",
+              renamed = "R",
+              untracked = "?",
+              deleted = "D",
+              ignored = "!",
+            },
+          },
+        },
+      },
+    },
   },
 
   -- Install a plugin
@@ -62,9 +119,13 @@ local plugins = {
 
   {
     "NvChad/nvim-colorizer.lua",
-    enabled = false
+    enabled = true
   },
 
+  {
+    "NvChad/base46",
+    enabled = true,
+  },
 }
 
 return plugins

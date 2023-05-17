@@ -5,7 +5,7 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 local lspconfig = require("lspconfig")
 
 -- if you just want default config for the servers then put them in a table
-local servers = { "html", "cssls", "tsserver", "clangd", "pyright" }
+local servers = { "html", "cssls", "clangd", "pyright" }
 
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
@@ -16,6 +16,7 @@ end
 
 -- 
 -- lspconfig.pyright.setup { blabla}
+lspconfig.tsserver.setup {}
 lspconfig.html.setup {
   filetypes = {"html", "htmldjango"},
   capabilities = capabilities,
@@ -24,6 +25,7 @@ lspconfig.html.setup {
     embeddedLanguages = {
       css = true,
       javascript = true
+
     },
     provideFormatter = true
   },

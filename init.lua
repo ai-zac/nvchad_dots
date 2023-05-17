@@ -7,9 +7,11 @@
 -- })
 vim.opt.breakindent = true
 vim.opt.relativenumber = true
+vim.opt.termguicolors = true
+-- vim.cmd [[ colorscheme themer_gruvbox]]
 -- vim.cmd([[
---   augroup TRANSPARENT_BG
+--   augroup COLOR
 --     autocmd!
---     autocmd VimEnter * highlight Normal ctermbg=NONE guibg=NONE
+--     autocmd ColorScheme	* colorscheme themer_gruvbox
 --   augroup END
 -- ]])

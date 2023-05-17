@@ -12,7 +12,7 @@ M.general = {
 M.diagnostic = {
   n = {
     ["<F2>"] = {
-      ":lua vim.diagnostic.open_float(nil, {focus=true})<CR>",
+      ":lua vim.diagnostic.open_float { border = 'rounded' }<CR>",
     },
   },
 }
@@ -43,8 +43,21 @@ M.tabs = {
 
 M.buffers = {
   n = {
-    ["<leader>bb"] = {
+    ["<Tab>"] = {
       ":bn<CR>",
+      "Fixed: Goto next buffer"
+    },
+    ["<S-Tab>"] = {
+      ":bp<CR>",
+      "Fixed: Goto prev buffer"
+    },
+    ["<leader>x"] = {
+      ":<C-U>bprevious <bar> bdelete #<CR>",
+      "Fixed: Close buffer and show another"
+    },
+    ["<leader>xc"] = {
+      ":bdelete",
+      "Fixed: Close buffer"
     },
   },
 }
