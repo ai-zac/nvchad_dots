@@ -1,11 +1,10 @@
-local on_attach = require("plugins.configs.lspconfig").on_attach
-local capabilities = require("plugins.configs.lspconfig").capabilities
+local configs = require("plugins.configs.lspconfig")
+local on_attach = configs.on_attach
+local capabilities = configs.capabilities
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-local lspconfig = require("lspconfig")
-
--- if you just want default config for the servers then put them in a table
-local servers = { "html", "cssls", "clangd", "pyright" }
+local lspconfig = require "lspconfig" 
+local servers = { "html", "cssls", "clangd", "tsserver", "pyright" }
 
 for _, lsp in ipairs(servers) do
   lspconfig[lsp].setup {
@@ -14,29 +13,52 @@ for _, lsp in ipairs(servers) do
   }
 end
 
--- 
--- lspconfig.pyright.setup { blabla}
-lspconfig.tsserver.setup {}
+lspconfig.pyright.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  cmd = { "pyright-langserver", "--stdio" },
+  filetypes = { "python" },
+  single_file_support = true,
+  settings = {
+    python = {
+      analysis = {
+        autoSearchPaths = true,
+        useLibraryCodeForTypes = true,
+        diagnosticMode = "openFilesOnly",
+      },
+    },
+  },
+}
+
 lspconfig.html.setup {
-  filetypes = {"html", "htmldjango"},
+  filetypes = { "html", "htmldjango" },
   capabilities = capabilities,
   init_options = {
     configurationSection = { "html", "css", "javascript", "htmldjango" },
     embeddedLanguages = {
       css = true,
-      javascript = true
-
+      javascript = true,
     },
-    provideFormatter = true
+    provideFormatter = true,
   },
   cmd = {
     "vscode-html-language-server",
-    "--stdio"
+    "--stdio",
   },
 }
 
-vim.diagnostic.config({
+vim.diagnostic.config {
+  underline = true,
+  signs = true,
   virtual_text = false,
-})
+  float = {
+    show_header = true,
+    source = "if_many",
+    border = "rounded",
+    focusable = false,
+  },
+  update_in_insert = false,
+  severity_sort = false,
+}
 
 vim.o.updatetime = 250

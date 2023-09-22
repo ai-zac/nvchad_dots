@@ -1,23 +1,28 @@
-local present, null_ls = pcall(require, "null-ls")
+local null_ls = require "null-ls"
 
-if not present then
-  return
-end
-
-local b = null_ls.builtins
+local builtin = null_ls.builtins
 
 local sources = {
+  -- python
+  builtin.diagnostics.ruff,
+  builtin.formatting.black,
 
   -- webdev stuff
-  b.formatting.deno_fmt,                                                    -- choosed deno for ts/js files cuz its very fast!
-  b.formatting.prettier.with { filetypes = { "html", "markdown", "css" } }, -- so prettier works only on these filetypes
+  builtin.formatting.deno_fmt,
+  builtin.formatting.prettier.with { filetypes = { "html", "markdown", "css" } },
 
   -- Lua
-  b.formatting.stylua,
+  builtin.formatting.stylua,
+  builtin.formatting.clang_format,
 
   -- cpp
-  b.formatting.clang_format,
-
+  builtin.formatting.shfmt.with {
+    {
+      extra_args = function(params)
+        return { "-i", vim.api.nvim_buf_get_option(params.bufnr, "shiftwidth") }
+      end,
+    },
+  },
 }
 
 null_ls.setup {

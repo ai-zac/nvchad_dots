@@ -1,42 +1,33 @@
-local overrides = require("custom.configs.overrides")
+local overrides = require "custom.configs.overrides"
 
 ---@type NvPluginSpec[]
 local plugins = {
   {
+    "andweeb/presence.nvim",
+    config = function()
+      require "custom.configs.presence-nvim"
+    end,
+    lazy = false,
+    enabled = true,
+  },
+
+  {
     "folke/zen-mode.nvim",
     config = function()
-      require("zen-mode").setup {
-        -- your configuration comes here
-        -- or leave it empty to use the default settings
-        -- refer to the configuration section below
-      }
+      require "custom.plugins.zen-mode"
     end,
     lazy = false,
     enabled = true,
   },
 
   {
-    'akinsho/bufferline.nvim',
-    config = function ()
-      require "custom.plugins.bufferline"
-    end,
-    enabled = true,
-    lazy = false,
-  },
-
-  {
-    'glepnir/dashboard-nvim',
-    event = 'VimEnter',
+    "glepnir/dashboard-nvim",
+    event = "VimEnter",
     config = function()
       require "custom.plugins.dashboard-nvim"
     end,
-    dependencies = { {'nvim-tree/nvim-web-devicons'}}
+    dependencies = { { "nvim-tree/nvim-web-devicons" } },
   },
-
-  {"hrsh7th/vim-vsnip"},
-  {"hrsh7th/vim-vsnip-integ"},
-
-  {"sainnhe/gruvbox-material"},
 
   {
     "neovim/nvim-lspconfig",
@@ -53,18 +44,18 @@ local plugins = {
     config = function()
       require "plugins.configs.lspconfig"
       require "custom.configs.lspconfig"
-    end, -- Override to setup mason-lspconfig
+    end,
   },
 
   -- override plugin configs
   {
     "williamboman/mason.nvim",
-    opts = overrides.mason
+    opts = overrides.mason,
   },
 
   {
-    'nvim-treesitter/playground',
-    config = function ()
+    "nvim-treesitter/playground",
+    config = function()
       require "custom.plugins.playground"
     end,
     lazy = false,
@@ -79,33 +70,7 @@ local plugins = {
 
   {
     "nvim-tree/nvim-tree.lua",
-    opts = {
-      git = {
-        enable = true,
-        ignore = false,
-      },
-
-      renderer = {
-        highlight_git = true,
-        icons = {
-          show = {
-            git = true,
-          },
-
-          glyphs = {
-            git = {
-              unstaged = "M",
-              staged = "A",
-              unmerged = "U",
-              renamed = "R",
-              untracked = "?",
-              deleted = "D",
-              ignored = "!",
-            },
-          },
-        },
-      },
-    },
+    opts = overrides.nvimtree,
   },
 
   -- Install a plugin
@@ -119,7 +84,7 @@ local plugins = {
 
   {
     "NvChad/nvim-colorizer.lua",
-    enabled = true
+    enabled = true,
   },
 
   {

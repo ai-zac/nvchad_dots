@@ -5,14 +5,26 @@ local M = {}
 M.general = {
   n = {
     [";"] = { ":", "enter command mode", opts = { nowait = true } },
+
+    ["<leader>f"] = {
+      ":lua vim.diagnostic.open_float() <CR>",
+      "open float diagnostic",
+    },
+
   },
 }
 
 
-M.diagnostic = {
+M.lspconfig = {
   n = {
-    ["<F2>"] = {
-      ":lua vim.diagnostic.open_float { border = 'rounded' }<CR>",
+    ["gd"] = {
+      ":Telescope lsp_definitions<CR>",
+      "LSP definition",
+    },
+
+    ["gi"] = {
+      ":Telescope lsp_implementations<CR>",
+      "LSP implementations",
     },
   },
 }
@@ -56,14 +68,14 @@ M.buffers = {
       "Fixed: Close buffer and show another"
     },
     ["<leader>xc"] = {
-      ":bdelete",
+      ":bdelete<CR>",
       "Fixed: Close buffer"
     },
   },
 }
 
 
-M.git = {
+M.telescope = {
   n = {
     ["<leader>g"] = {
       ":Telescope git_",
@@ -71,23 +83,5 @@ M.git = {
   },
 }
 
-
-M.nvterm = {
-  n = {
-    ["<C-A-h>"] = {
-      function()
-        require("nvterm.terminal").toggle "horizontal"
-      end,
-    },
-  },
-
-  t = {
-    ["<C-A-h>"] = {
-      function()
-        require("nvterm.terminal").toggle "horizontal"
-      end,
-    },
-  },
-}
 
 return M

@@ -2,6 +2,7 @@ local M = {}
 
 M.treesitter = {
   ensure_installed = {
+    "javascript",
     "vim",
     "lua",
     "html",
@@ -16,9 +17,6 @@ M.treesitter = {
   },
   indent = {
     enable = true,
-    -- disable = {
-    --   "python"
-    -- },
   },
 }
 
@@ -43,17 +41,16 @@ M.mason = {
 
     -- python
     "pyright",
-    "autopep8",
+    "ruff",
+    "black",
     "debugpy",
-    "flake8",
-    "python-lsp-server",
   },
 }
 
--- git support in nvimtree
 M.nvimtree = {
   git = {
     enable = true,
+    ignore = false,
   },
 
   renderer = {
@@ -61,6 +58,18 @@ M.nvimtree = {
     icons = {
       show = {
         git = true,
+      },
+
+      glyphs = {
+        git = {
+          unstaged = "M",
+          staged = "A",
+          unmerged = "U",
+          renamed = "R",
+          untracked = "?",
+          deleted = "D",
+          ignored = "!",
+        },
       },
     },
   },

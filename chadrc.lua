@@ -5,7 +5,7 @@ local M = {}
 local highlights = require "custom.highlights"
 
 M.ui = {
-  theme = "gruvchad",
+  theme = "kanagawa",
   transparency = true,
   lsp_semantic_tokens = true, -- needs nvim v0.9, just adds highlight groups for lsp semantic tokens
 
@@ -25,7 +25,7 @@ M.ui = {
 
   tabufline = {
     show_numbers = true,
-    enabled = false,
+    enabled = true,
     lazyload = false,
   },
 
