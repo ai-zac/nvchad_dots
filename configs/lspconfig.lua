@@ -1,9 +1,10 @@
-local configs = require("plugins.configs.lspconfig")
+local configs = require "plugins.configs.lspconfig"
 local on_attach = configs.on_attach
 local capabilities = configs.capabilities
+
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-local lspconfig = require "lspconfig" 
+local lspconfig = require "lspconfig"
 local servers = { "html", "cssls", "clangd", "tsserver", "pyright" }
 
 for _, lsp in ipairs(servers) do
@@ -25,6 +26,7 @@ lspconfig.pyright.setup {
         autoSearchPaths = true,
         useLibraryCodeForTypes = true,
         diagnosticMode = "openFilesOnly",
+        typeCheckingMode = 'off',
       },
     },
   },
